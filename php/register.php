@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         h1 {
             text-align: center;
-            color: #444;
+            color: black;
             margin-bottom: 20px;
         }
 
@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-prompt {
             text-align: center;
             font-size: 16px;
-            color: #555;
+            color: #black;
             margin-top: 20px;
         }
 
