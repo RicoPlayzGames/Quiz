@@ -65,8 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: url('Logo quiz.png') no-repeat center center fixed;
-            background-size: cover;
+            background-color: Grey;
+            background-size: 100px;
+            background-position: center;
             color: #333;
             margin: 0;
             padding: 0;
@@ -116,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         button {
-            background-color: #007BFF;
+            background-color:rgb(225, 248, 21);
             color: white;
             border: none;
             cursor: pointer;
@@ -125,11 +126,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color:rgb(116, 125, 0);
         }
 
         p {
             text-align: center;
+        
         }
 
         a {
