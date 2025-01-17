@@ -1,10 +1,16 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
+if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
+
+if ($_SESSION['role'] !== 'student') { // Of 'teacher' voor docentportaal
+    header('Location: unauthorized.php'); // Toon een foutpagina als rol niet klopt
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
