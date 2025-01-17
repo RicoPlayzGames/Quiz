@@ -13,21 +13,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute(['email' => $email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && hash('sha256', $password) === $user['Password_hash']) {
-        // Sessie starten
-        $_SESSION['user_id'] = $user['User_id'];
-        $_SESSION['role'] = $user['Role'];
+if ($user && hash('sha512', $password) === $user['Password_hash']) {
+    // Sessie starten
+    $_SESSION['user_id'] = $user['User      _id'];
+    $_SESSION['role'] = $user['Role'];
 
-        // Naar het juiste portaal
-        if ($user['Role'] === 'student') {
-            header('Location: student_portal.php');
-        } elseif ($user['Role'] === 'teacher') {
-            header('Location: teacher_portal.php');
-        }
-        exit;
-    } else {
-        $error = 'Ongeldige inloggegevens.';
+    // Redirect op basis van rol
+    if ($user['Role'] === 'student') {
+        header('Location: /php/student_portal.php');
+    } elseif ($user['Role'] === 'teacher') {
+        header('Location: /php/teacher_portal.php');
     }
+    exit;
+} else {
+    $error = 'Ongeldige inloggegevens.';
+}
 }
 ?>
 
