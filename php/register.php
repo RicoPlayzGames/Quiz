@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .login-prompt {
             text-align: center;
             font-size: 16px;
-            color: #black;
+            color: #000;
             margin-top: 20px;
         }
 
