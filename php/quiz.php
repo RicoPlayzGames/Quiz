@@ -1,10 +1,9 @@
 <?php
-// Array met vragen en antwoorden
 $questions = [
     [
         "question" => "Wat is de hoofdstad van Nederland?",
         "answers" => ["Amsterdam", "Rotterdam", "Den Haag", "Utrecht"],
-        "correct" => 0 // Index van het juiste antwoord
+        "correct" => 0 
     ],
     [
         "question" => "Welke planeet staat het dichtst bij de zon?",
@@ -18,27 +17,26 @@ $questions = [
     ],
 ];
 
-// Start sessie
+
 session_start();
 
-// Reset quiz als er een nieuwe start is
+
 if (isset($_GET['reset'])) {
     session_destroy();
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
 
-// Sessie initialiseren
+
 if (!isset($_SESSION['currentQuestionIndex'])) {
-    $_SESSION['currentQuestionIndex'] = 0; // Begin bij de eerste vraag
-    $_SESSION['correctAnswers'] = 0;      // Tel het aantal correcte antwoorden
-    $_SESSION['totalQuestions'] = count($questions); // Totaal aantal vragen
+    $_SESSION['currentQuestionIndex'] = 0; 
+    $_SESSION['correctAnswers'] = 0;      
+    $_SESSION['totalQuestions'] = count($questions); 
 }
 
-// Huidige vraag ophalen
 $currentQuestionIndex = $_SESSION['currentQuestionIndex'];
 
-// Controleren of alle vragen zijn beantwoord
+
 if ($currentQuestionIndex >= $_SESSION['totalQuestions']) {
     $quizFinished = true;
 } else {
@@ -46,14 +44,14 @@ if ($currentQuestionIndex >= $_SESSION['totalQuestions']) {
     $currentQuestion = $questions[$currentQuestionIndex];
 }
 
-// Controleren of een antwoord is gegeven
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
     $selectedAnswer = intval($_POST['answer']);
     if ($selectedAnswer === $currentQuestion['correct']) {
-        $_SESSION['correctAnswers']++; // Verhoog het aantal correcte antwoorden
+        $_SESSION['correctAnswers']++; 
     }
 
-    // Naar de volgende vraag
+    
     $_SESSION['currentQuestionIndex']++;
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
