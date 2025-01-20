@@ -37,6 +37,7 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <img src="Logo Quiz.png" alt="Logo quiz" class="logo">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,6 +67,12 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             max-width: 400px;
             width: 100%;
+        }
+        .logo {
+            width: 150px; 
+            height: auto;
+            display: block;
+            margin: 0 auto 20px; 
         }
 
         label {
@@ -153,13 +160,13 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
     </style>
 </head>
 <body>
-    <h1>Login</h1>
     <?php if ($error): ?>
         <p style="color: red;"><?php echo $error; ?></p>
     <?php endif; ?>
     <form method="POST">
-        <label for="email">E-mail:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+        <h1>Login</h1>
+    <label for="username">Gebruikersnaam:</label>
+    <input type="text" id="username" name="username" required>
         <label for="password">Wachtwoord:</label><br>
         <input type="password" id="password" name="password" required><br><br>
         <button type="submit">Inloggen</button>
