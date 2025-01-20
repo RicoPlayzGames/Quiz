@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: Grey;
+            background-color:rgb(179, 178, 178);
             background-size: 100px;
             background-position: center;
             color: #333;
@@ -94,10 +94,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             width: 100%;
         }
         .logo {
-    width: 150px; 
-    height: auto; 
-    display: block;
-    margin: 0 auto 20px; 
+        width: 150px; 
+        height: auto; 
+        display: block;
+        margin: 0 auto 20px; 
+        position: absolute;
+        top: 10px; /* Afstand vanaf de bovenkant */
+        left: 10px; /* Afstand vanaf de linkerkant */
+        width: 150px; /* Houd de grootte consistent */
+        height: auto; /* Zorg ervoor dat de verhoudingen behouden blijven */
 }
 
         label {
@@ -122,6 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             outline: none;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
+        
 
         button {
             background-color:rgb(225, 248, 21);

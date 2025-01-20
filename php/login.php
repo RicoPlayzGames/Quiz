@@ -41,7 +41,7 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: Grey;
+            background-color:rgb(179, 178, 178);
             background-size: 100px;
             background-position: center;
             color: #333;
@@ -70,10 +70,15 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
             width: 100%;
         }
         .logo {
-    width: 150px; 
-    height: auto; 
-    display: block;
-    margin: 0 auto 20px; 
+        width: 150px; 
+        height: auto; 
+        display: block;
+        margin: 0 auto 20px; 
+        position: absolute;
+        top: 10px; /* Afstand vanaf de bovenkant */
+        left: 10px; /* Afstand vanaf de linkerkant */
+        width: 150px; /* Houd de grootte consistent */
+        height: auto; /* Zorg ervoor dat de verhoudingen behouden blijven */
 }
 
         label {
@@ -166,7 +171,7 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
     <?php endif; ?>
     <form method="POST">
     <h1>Login</h1>
-    <label for="username">Gebruikersnaam:</label>
+    <label for="username">Gebruikersnaam/Email:</label>
     <input type="text" id="username" name="username" required>
         <label for="password">Wachtwoord:</label><br>
         <input type="password" id="password" name="password" required><br><br>
