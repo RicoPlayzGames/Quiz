@@ -77,7 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             align-items: center;
             height: 100vh;
-
         }
 
         h1 {
@@ -197,6 +196,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="username">Gebruikersnaam:</label>
         <input type="text" id="username" name="username" required>
 
+        <label for="email">E-mailadres:</label>
+        <input type="email" id="email" name="email" required>
+
         <label for="password">Wachtwoord:</label>
         <input type="password" id="password" name="password" required>
 
@@ -214,3 +216,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p class="login-prompt">Al een account? <a href="login.php" class="login-link">Log in</a>.</p>
 </body>
 </html>
+
