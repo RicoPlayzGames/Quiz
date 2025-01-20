@@ -62,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registreren</title>
-        <img src="Logo Quiz.png" alt="Logo quiz" class="logo">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -77,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             justify-content: center;
             align-items: center;
             height: 100vh;
-
         }
 
         h1 {
@@ -93,12 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             max-width: 400px;
             width: 100%;
-        }
-        .logo {
-            width: 150px; 
-            height: auto;
-            display: block;
-            margin: 0 auto 20px; 
         }
 
         label {
@@ -186,16 +178,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
+    <h1>Registreren</h1>
+    
     <?php if ($error): ?>
         <p class="error"> <?php echo htmlspecialchars($error); ?> </p>
     <?php elseif ($success): ?>
         <p class="success"> <?php echo htmlspecialchars($success); ?> </p>
     <?php endif; ?>
     <form method="POST">
-    <h1>Registreren</h1>
-
         <label for="username">Gebruikersnaam:</label>
         <input type="text" id="username" name="username" required>
+
+        <label for="email">E-mailadres:</label>
+        <input type="email" id="email" name="email" required>
 
         <label for="password">Wachtwoord:</label>
         <input type="password" id="password" name="password" required>
