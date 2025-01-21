@@ -46,11 +46,13 @@
         .search-bar {
             flex-grow: 1;
             margin: 0 20px;
+            display: flex;
+            justify-content: center;
         }
 
         .search-bar input {
-            width: 100%;
-            padding: 8px;
+            width: 800px; /* Maak de zoekbalk smaller */
+            padding: 6px 10px; /* Verklein de padding */
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -123,7 +125,6 @@
             <a class="quiz-item" href="">Quiz</a>
             </div>
         </section>
-
     </div>
 </body>
 </html>
