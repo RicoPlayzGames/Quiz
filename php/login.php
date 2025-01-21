@@ -5,29 +5,38 @@ require 'config.php';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = $_POST['email']; // changed 'email' to match the input field
+    $password = $_POST['password']; // changed 'password' to match the input field
 
-    // Gebruiker opzoeken in de database
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE Email = :email");
-    $stmt->execute(['email' => $email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Validate email and password
+    if (empty($email) || empty($password)) {
+        $error = 'Alle velden moeten worden ingevuld.';
+    } else {
+        try {
+            // Check if user exists
+            $stmt = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($user && hash('sha512', $password) === $user['Password_hash']) {
-    // Sessie starten
-    $_SESSION['user_id'] = $user['User      _id'];
-    $_SESSION['role'] = $user['Role'];
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['role'] = $user['role'];
+                $_SESSION['username'] = $user['username'];
 
-    // Redirect op basis van rol
-    if ($user['Role'] === 'student') {
-        header('Location: /php/student_portal.php');
-    } elseif ($user['Role'] === 'teacher') {
-        header('Location: /php/teacher_portal.php');
+                // Redirect based on role
+                if ($user['role'] === 'teacher') {
+                    header('Location: teacher_portal.php');
+                } else {
+                    header('Location: student_portal.php');
+                }
+                exit;
+            } else {
+                $error = 'Ongeldige inloggegevens.';
+            }
+        } catch (PDOException $e) {
+            $error = 'Fout bij het inloggen: ' . $e->getMessage();
+        }
     }
-    exit;
-} else {
-    $error = 'Ongeldige inloggegevens.';
-}
 }
 ?>
 
@@ -52,7 +61,6 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
             justify-content: center;
             align-items: center;
             height: 100vh;
-
         }
 
         h1 {
@@ -69,17 +77,18 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
             max-width: 400px;
             width: 100%;
         }
+
         .logo {
-        width: 150px; 
-        height: auto; 
-        display: block;
-        margin: 0 auto 20px; 
-        position: absolute;
-        top: 10px; /* Afstand vanaf de bovenkant */
-        left: 10px; /* Afstand vanaf de linkerkant */
-        width: 150px; /* Houd de grootte consistent */
-        height: auto; /* Zorg ervoor dat de verhoudingen behouden blijven */
-}
+            width: 150px; 
+            height: auto; 
+            display: block;
+            margin: 0 auto 20px; 
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 150px;
+            height: auto;
+        }
 
         label {
             display: block;
@@ -119,7 +128,6 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
 
         p {
             text-align: center;
-        
         }
 
         a {
@@ -167,15 +175,17 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
 </head>
 <body>
     <?php if ($error): ?>
-        <p style="color: red;"><?php echo $error; ?></p>
+        <p class="error"><?php echo $error; ?></p>
     <?php endif; ?>
-    <form method="POST">
-    <h1>Login</h1>
-    <label for="username">Gebruikersnaam:</label>
-    <input type="text" id="username" name="username" required>
-        <label for="password">Wachtwoord:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Inloggen</button>
+    
+    <form action="login.php" method="POST" autocomplete="on">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" autocomplete="email">
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" autocomplete="current-password">
+        
+        <button type="submit">Login</button>
     </form>
     <p class="login-prompt">Nog geen account? <a href="register.php" class="login-link">Account aanmaken</a>.</p>
 </body>

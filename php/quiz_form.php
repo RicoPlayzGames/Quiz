@@ -14,12 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $pdo->beginTransaction();
 
-            // Voeg de quiz toe
+            // Add the quiz
             $stmt = $pdo->prepare("INSERT INTO quizzes (name) VALUES (:name)");
             $stmt->execute(['name' => $quizName]);
             $quizId = $pdo->lastInsertId();
 
-            // Voeg de vragen en antwoorden toe
+            // Add questions and answers
             foreach ($questions as $question) {
                 $stmt = $pdo->prepare("INSERT INTO questions (question, quiz_id) VALUES (:question, :quiz_id)");
                 $stmt->execute([
