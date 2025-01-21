@@ -179,6 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     
     <form action="login.php" method="POST" autocomplete="on">
+        <h1>Login</h1>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" autocomplete="email">
         
