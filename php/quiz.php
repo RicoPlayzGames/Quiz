@@ -232,11 +232,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             </div>
             <form method="POST" class="answers" id="quizForm">
                 <?php foreach ($currentQuestion["answers"] as $index => $answer): ?>
-                    <button type="submit" name="answer" value="<?php echo $index; ?>">
+                    <button type="submit" name="answer" value=""<?php echo $index; ?>">
                         <?php echo htmlspecialchars($answer); ?>
                     </button>
                 <?php endforeach; ?>
-                <input type="hidden" name="answer" id="hiddenAnswer" value="5">
+                <input type="hidden" name="answer" id="hiddenAnswer" value="">
             </form>
             <div class="timer" id="timer">15</div>
         <?php endif; ?>
