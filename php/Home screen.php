@@ -29,8 +29,15 @@
         .nav-bar {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 30px; 
+            margin-left: 20px; 
         }
+
+        #register {
+            margin-right: 10px; 
+        }
+
+        #login {}
 
         .nav-bar a {
             text-decoration: none;
@@ -45,14 +52,14 @@
 
         .search-bar {
             flex-grow: 1;
-            margin: 0 20px;
+            margin: 0 20px 0 0; 
             display: flex;
             justify-content: center;
         }
 
         .search-bar input {
-            width: 800px; /* Maak de zoekbalk smaller */
-            padding: 6px 10px; /* Verklein de padding */
+            width: 800px;
+            padding: 6px 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -111,8 +118,8 @@
             <input type="text" placeholder="Zoek naar quizzen...">
         </div>
         <nav class="nav-bar">
-            <a href="register.php">Sign up</a>
-            <a href="login.php">Login</a>
+            <a id="register" href="register.php">Sign up</a>
+            <a id="login" href="login.php">Login</a>
         </nav>
     </header>
 
@@ -128,3 +135,4 @@
     </div>
 </body>
 </html>
+
