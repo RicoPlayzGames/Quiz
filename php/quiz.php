@@ -224,8 +224,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             <form method="get">
                 <button class="reset-button" name="reset">Opnieuw starten</button>
             </form>
-            <form action="Home screen.php" method="get">
-                <button class="reset-button">Terug naar beginscherm</button>
+            <form method="get" action="Home screen.php">
+                <button class="reset-button" >Terug naar beginscherm</button>
             </form>
         <?php else: ?>
             <div class="question">
@@ -237,6 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
                         <?php echo htmlspecialchars($answer); ?>
                     </button>
                 <?php endforeach; ?>
+                <input type="hidden" name="answer" id="hiddenAnswer" value="">
             </form>
             <div class="timer" id="timer">15</div>
         <?php endif; ?>
@@ -245,14 +246,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
         let timeLeft = 15; // Timer starts at 15 seconds
         const timerElement = document.getElementById('timer');
         const quizForm = document.getElementById('quizForm');
+        const hiddenAnswerInput = document.getElementById('hiddenAnswer');
         
         const countdown = setInterval(() => {
             if (timeLeft <= 0) {
                 clearInterval(countdown);
-                quizForm.submit(); // Automatically submit the form when time is up
+                hiddenAnswerInput.value = ""; // Zet het antwoord op leeg
+                quizForm.submit(); // Automatisch formulier verzenden
             } else {
                 timeLeft--;
-                timerElement.textContent = timeLeft; // Update the timer on the page
+                timerElement.textContent = timeLeft; // Update de timer op de pagina
             }
         }, 1000);
     </script>
