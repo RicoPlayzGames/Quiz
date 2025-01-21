@@ -12,7 +12,6 @@
             background-color: rgb(179, 178, 178);
         }
 
-        /* Header en navigatie */
         .header {
             display: flex;
             justify-content: space-between;
@@ -56,11 +55,9 @@
             border-radius: 5px;
         }
 
-        /* Hoofdcontent */
         .main-content {
-            display: flex;
+            display: 100px;
             margin: 20px;
-            gap: 20px;
         }
 
         .quiz-section {
@@ -94,7 +91,6 @@
             text-align: center;
         }
 
-        /* Responsiviteit */
         @media (max-width: 768px) {
             .main-content {
                 flex-direction: column;
@@ -107,7 +103,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <img src="Logo Quiz.png" alt="Logo" class="logo">
         <div class="search-bar">
@@ -124,8 +119,8 @@
             <h2>Speelbare quizzen</h2>
             <div class="quiz-grid">
             <a class="quiz-item" href="quiz.php">Quiz</a>
-                <div class="quiz-item">Quiz</div>
-                <div class="quiz-item">Quiz</div>
+            <a class="quiz-item" href="">Quiz</a>
+            <a class="quiz-item" href="">Quiz</a>
             </div>
         </section>
 
