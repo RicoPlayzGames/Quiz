@@ -188,6 +188,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             cursor: pointer;
             border-radius: 10px;
         }
+        .return-button{
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4682b4;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }    
+        .return-button:hover{
+            background-color: #4169e1;
+        }
         .reset-button:hover {
             background-color: #4169e1;
         }
@@ -213,6 +226,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             <form method="get">
                 <button class="reset-button" name="reset">Opnieuw starten</button>
             </form>
+            <form action="Home screen.php" method="get">
+                <button class="return-button">Terug naar beginscherm</button>
+            </form>
+
         <?php else: ?>
             <div class="question">
                 <p><?php echo htmlspecialchars($currentQuestion["question"]); ?></p>
