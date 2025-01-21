@@ -167,6 +167,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
         .answers button:hover {
             transform: scale(1.1);
         }
+        .timer {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
         .result {
             font-size: 1.5rem;
             color: #333;
@@ -187,19 +198,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             border: none;
             cursor: pointer;
             border-radius: 10px;
-        }
-        .return-button{
-            margin-top: 30px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            background-color: #4682b4;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-        }    
-        .return-button:hover{
-            background-color: #4169e1;
         }
         .reset-button:hover {
             background-color: #4169e1;
@@ -227,21 +225,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
                 <button class="reset-button" name="reset">Opnieuw starten</button>
             </form>
             <form action="Home screen.php" method="get">
-                <button class="return-button">Terug naar beginscherm</button>
+                <button class="reset-button">Terug naar beginscherm</button>
             </form>
-
         <?php else: ?>
             <div class="question">
                 <p><?php echo htmlspecialchars($currentQuestion["question"]); ?></p>
             </div>
-            <form method="POST" class="answers">
+            <form method="POST" class="answers" id="quizForm">
                 <?php foreach ($currentQuestion["answers"] as $index => $answer): ?>
                     <button type="submit" name="answer" value="<?php echo $index; ?>">
                         <?php echo htmlspecialchars($answer); ?>
                     </button>
                 <?php endforeach; ?>
             </form>
+            <div class="timer" id="timer">15</div>
         <?php endif; ?>
     </div>
+    <script>
+        let timeLeft = 15; // Timer starts at 15 seconds
+        const timerElement = document.getElementById('timer');
+        const quizForm = document.getElementById('quizForm');
+        
+        const countdown = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                quizForm.submit(); // Automatically submit the form when time is up
+            } else {
+                timeLeft--;
+                timerElement.textContent = timeLeft; // Update the timer on the page
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
+
