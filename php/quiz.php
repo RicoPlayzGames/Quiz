@@ -237,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
                         <?php echo htmlspecialchars($answer); ?>
                     </button>
                 <?php endforeach; ?>
-                <input type="hidden" name="answer" id="hiddenAnswer" value="">
+                <input type="hidden" name="answer" id="hiddenAnswer" value="5">
             </form>
             <div class="timer" id="timer">15</div>
         <?php endif; ?>
@@ -251,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
         const countdown = setInterval(() => {
             if (timeLeft <= 0) {
                 clearInterval(countdown);
-                hiddenAnswerInput.value = ""; // Zet het antwoord op leeg
+                hiddenAnswerInput.value = "5"; // Zet het antwoord op leeg
                 quizForm.submit(); // Automatisch formulier verzenden
             } else {
                 timeLeft--;
