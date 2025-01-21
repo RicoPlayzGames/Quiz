@@ -36,9 +36,9 @@ $questions = [
         "correct" => 0
     ],
     [
-        "question" => "Wat is het meest voorkomende gas in de aardatmosfeer?",
-        "answers" => ["Zuurstof", "Stikstof", "Koolstofdioxide", "Waterstof"],
-        "correct" => 1
+        "question" => "Wie is de beste vriend van Spongebob?",
+        "answers" => ["Octo", "MR.Krabs", "Patrick", "Gerrit"],
+        "correct" => 3
     ],
     [
         "question" => "Hoeveel planeten heeft ons zonnestelsel?",

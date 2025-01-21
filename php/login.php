@@ -171,7 +171,7 @@ if ($user && hash('sha512', $password) === $user['Password_hash']) {
     <?php endif; ?>
     <form method="POST">
     <h1>Login</h1>
-    <label for="username">Gebruikersnaam/Email:</label>
+    <label for="username">Gebruikersnaam:</label>
     <input type="text" id="username" name="username" required>
         <label for="password">Wachtwoord:</label><br>
         <input type="password" id="password" name="password" required><br><br>
