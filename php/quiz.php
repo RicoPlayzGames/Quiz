@@ -98,13 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weet & Win</title>
     <style>
-        /* Algemene styling */
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #87ceeb, #4682b4); /* Hemelblauwe gradient */
+            background: linear-gradient(to bottom, #87ceeb, #4682b4); 
             color: #333;
         }
         h1 {
