@@ -5,56 +5,45 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Formuliergegevens ophalen en ontsmetten
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
-    $confirm_password = trim($_POST['confirm_password']);
-    $role = trim($_POST['role']);
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm_password'];
+    $role = $_POST['role'];
 
-    // Validatie
-    if (empty($username) || empty($email) || empty($password) || empty($confirm_password) || empty($role)) {
-        $error = 'Alle velden zijn verplicht.';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Ongeldig e-mailadres.';
-    } elseif ($password !== $confirm_password) {
+    // Validation
+    if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
+        $error = 'Alle velden moeten worden ingevuld.';
+    } elseif ($password !== $confirmPassword) {
         $error = 'Wachtwoorden komen niet overeen.';
     } else {
         try {
-            // Controleren of het e-mailadres al bestaat
-            $stmt = $pdo->prepare("SELECT * FROM users WHERE Email = :email");
-            $stmt->execute(['email' => $email]);
+            // Check if user already exists
+            $stmt = $pdo->prepare('SELECT * FROM users WHERE username = :username OR email = :email');
+            $stmt->execute(['username' => $username, 'email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user) {
-                $error = 'E-mailadres is al geregistreerd.';
+                $error = 'De gebruikersnaam of het e-mailadres is al in gebruik.';
             } else {
-                // Wachtwoord hashen
-                $password_hash = hash('sha256', $password);
-
-                // Nieuwe gebruiker toevoegen
-                $stmt = $pdo->prepare("
-                    INSERT INTO users (Username, Password_hash, Email, Role) 
-                    VALUES (:username, :password_hash, :email, :role)
-                ");
-
+                // Insert new user
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+                $stmt = $pdo->prepare('INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, :role)');
                 $stmt->execute([
                     'username' => $username,
-                    'password_hash' => $password_hash,
                     'email' => $email,
+                    'password' => $hashedPassword,
                     'role' => $role
                 ]);
-
-                $success = 'Registratie voltooid! U kunt nu inloggen.';
-                header('Location: login.php');
-                exit;
+                $success = 'Registratie succesvol!';
             }
         } catch (PDOException $e) {
-            $error = 'Er is een fout opgetreden: ' . $e->getMessage();
+            $error = 'Fout bij het registreren: ' . $e->getMessage();
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
