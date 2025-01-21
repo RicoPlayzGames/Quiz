@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Quiz Platform</title>
+    <title>Beginscherm</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,8 +29,9 @@
         .nav-bar {
             display: flex;
             align-items: center;
-            gap: 30px; 
-            margin-left: 20px; 
+            gap: 80px; 
+            margin-left: -60px; 
+            margin-right: 80px;
         }
 
         #register {
@@ -43,7 +44,8 @@
             text-decoration: none;
             color: black;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 18px;
+            margin-left: 20px;
         }
 
         .nav-bar a:hover {
@@ -55,6 +57,7 @@
             margin: 0 20px 0 0; 
             display: flex;
             justify-content: center;
+            margin-right: 20px;
         }
 
         .search-bar input {
@@ -79,13 +82,16 @@
 
         .quiz-section h2 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom:450px;
         }
 
         .quiz-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
+            font-size: 30px;
+            transform: translateY(-400px);
+            margin-left: 250px;
         }
 
         .quiz-item {
@@ -99,6 +105,7 @@
             font-weight: bold;
             text-align: center;
         }
+
 
         @media (max-width: 768px) {
             .main-content {
@@ -127,7 +134,7 @@
         <section class="quiz-section">
             <h2>Speelbare quizzen</h2>
             <div class="quiz-grid">
-            <a class="quiz-item" href="quiz.php">Quiz</a>
+            <a href="quiz.php"><img src="Profielfoto quiz 1.png" alt="Logo quiz" class="quiz-item"></a>
             <a class="quiz-item" href="">Quiz</a>
             <a class="quiz-item" href="">Quiz</a>
             </div>
