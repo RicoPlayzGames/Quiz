@@ -18,18 +18,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute(['email' => $email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['role'] = $user['role'];
-                $_SESSION['username'] = $user['username'];
+            if ($user) {
+                // Hash the input password
+                $hashedInputPassword = password_hash($password, PASSWORD_DEFAULT);
+             
+                // Compare the newly hashed password with the database hash
+                if (hash_equals($hashedInputPassword, $user['password'])) {
+                    // Correct password
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['role'] = $user['role'];
+                    $_SESSION['username'] = $user['username'];
+             
+                    // Redirect based on role
+                    if ($user['role'] === 'teacher') {
+                        header('Location: teacher_portal.php');
+                    } else {
+                        header('Location: student_portal.php');
+                    }
+                    exit;
 
-                // Redirect based on role
-                if ($user['role'] === 'teacher') {
-                    header('Location: teacher_portal.php');
                 } else {
-                    header('Location: student_portal.php');
+                    // Password is incorrect
+                    $error = 'Ongeldige inloggegevens.';
                 }
-                exit;
             } else {
                 $error = 'Ongeldige inloggegevens.';
             }
@@ -39,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

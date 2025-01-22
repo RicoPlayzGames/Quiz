@@ -38,7 +38,7 @@ $questions = [
     [
         "question" => "Wie is de beste vriend van Spongebob?",
         "answers" => ["Octo", "MR.Krabs", "Patrick", "Gerrit"],
-        "correct" => 3
+        "correct" => 2
     ],
     [
         "question" => "Hoeveel planeten heeft ons zonnestelsel?",
@@ -51,31 +51,31 @@ $questions = [
         "correct" => 1
     ],
 ];
- 
+
 session_start();
- 
+
 if (isset($_GET['reset'])) {
     session_destroy();
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
- 
+
 if (!isset($_SESSION['currentQuestionIndex'])) {
     $_SESSION['currentQuestionIndex'] = 0;
-    $_SESSION['correctAnswers'] = 0;      
+    $_SESSION['correctAnswers'] = 0;
     $_SESSION['totalQuestions'] = count($questions);
     $_SESSION['feedback'] = [];
 }
- 
+
 $currentQuestionIndex = $_SESSION['currentQuestionIndex'];
- 
+
 if ($currentQuestionIndex >= $_SESSION['totalQuestions']) {
     $quizFinished = true;
 } else {
     $quizFinished = false;
     $currentQuestion = $questions[$currentQuestionIndex];
 }
- 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
     $selectedAnswer = intval($_POST['answer']);
     if ($selectedAnswer === $currentQuestion['correct']) {
@@ -85,12 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
         $correctAnswerText = $currentQuestion['answers'][$currentQuestion['correct']];
         $_SESSION['feedback'][] = "Fout! De vraag \"" . $currentQuestion['question'] . "\" was fout beantwoord. Het juiste antwoord was \"$correctAnswerText\".";
     }
- 
+
     $_SESSION['currentQuestionIndex']++;
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,20 +104,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             text-align: center;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #87ceeb, #4682b4); 
+            background: linear-gradient(to bottom, #87ceeb, #4682b4);
             color: #333;
         }
         h1 {
             color: #ffffff;
             font-size: 3rem;
             margin: 20px 0;
-        }
-        .logo {
-            width: 120px;
-            height: 120px;
-            background: url('DALL_E_2025-01-13_11.14.57_-_A_vibrant_and_dynamic_logo_design_for_a_quiz_program_called_Weet___Win._The_logo_features_bold__playful_fonts_with_a_modern_style__incorporating_a_m-removebg-preview.png') no-repeat center;
-            background-size: contain;
-            margin: 20px auto;
         }
         .container {
             max-width: 800px;
@@ -146,8 +140,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             cursor: pointer;
             color: #333;
             transition: transform 0.2s, background-color 0.3s;
-        }
-        .answers button:nth-child(1) {
+
+        }        .answers button:nth-child(1) {
             background-color: #ff6b6b;
             color: #fff;
         }
@@ -166,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
         .answers button:hover {
             transform: scale(1.1);
         }
-        .timer {
+              .timer {
             position: fixed;
             right: 20px;
             top: 50%;
@@ -176,8 +170,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             background: rgba(0, 0, 0, 0.5);
             padding: 10px 20px;
             border-radius: 10px;
-        }
-        .result {
+        }   
+             .result {
             font-size: 1.5rem;
             color: #333;
         }
@@ -204,7 +198,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
     </style>
 </head>
 <body>
-    <div class="logo"></div>
     <h1>Weet & Win</h1>
     <div class="container">
         <?php if ($quizFinished): ?>
@@ -222,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             </div>
             <form method="get">
                 <button class="reset-button" name="reset">Opnieuw starten</button>
-            </form>
+            </form>            
             <form method="get" action="Home screen.php">
                 <button class="reset-button" >Terug naar beginscherm</button>
             </form>
@@ -230,14 +223,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
             <div class="question">
                 <p><?php echo htmlspecialchars($currentQuestion["question"]); ?></p>
             </div>
-            <form method="POST" class="answers" id="quizForm">
+            <form method="POST" class="answers">
                 <?php foreach ($currentQuestion["answers"] as $index => $answer): ?>
-                    <button type="submit" name="answer" value=""<?php echo $index; ?>">
+                    <button type="submit" name="answer" value="<?php echo $index; ?>">
                         <?php echo htmlspecialchars($answer); ?>
                     </button>
                 <?php endforeach; ?>
-                <input type="hidden" name="answer" id="hiddenAnswer" value="">
-            </form>
+            </form>            
             <div class="timer" id="timer">15</div>
         <?php endif; ?>
     </div>
@@ -260,4 +252,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
     </script>
 </body>
 </html>
+
 
