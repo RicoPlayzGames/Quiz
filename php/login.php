@@ -59,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <a href="Home screen.php"><img src="Logo Quiz.png" alt="Logo quiz" class="logo"></a>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <?php if ($error): ?>
