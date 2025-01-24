@@ -98,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$quizFinished) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weet & Win Quiz</title>
+    <link rel="stylesheet" href="/php/quiz.css">
 </head>
 <body>
     <h1>Weet & Win</h1>
