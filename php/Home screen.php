@@ -23,8 +23,6 @@
             <h2>Speelbare quizzen</h2>
             <div class="quiz-grid">
             <a href="quiz.php"><img src="Verbeterde Profielfoto quiz.png" alt="Logo quiz" class="quiz-item"></a>
-            <a class="quiz-item" href="">Empty Quiz</a>
-            <a class="quiz-item" href="">Empty Quiz</a>
             </div>
         </section>
     </div>
